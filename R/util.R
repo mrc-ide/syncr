@@ -9,3 +9,11 @@ Sys_which <- function(names, error=TRUE) {
     NULL
   }
 }
+
+is_absolute_path <- function(path) {
+  grepl("^(/|[A-Z][a-z]:)", path)
+}
+
+is_relative_path <- function(path) {
+  !is_absolute_path(path)
+}

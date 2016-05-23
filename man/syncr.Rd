@@ -5,8 +5,8 @@
 \title{syncr}
 \usage{
 syncr(src, dest, archive = TRUE, compress = TRUE, verbose = FALSE,
-  delete = FALSE, dry_run = FALSE, drop_src_directory = FALSE,
-  args_only = FALSE)
+  relative = FALSE, delete = FALSE, dry_run = FALSE,
+  drop_src_directory = FALSE, args_only = FALSE)
 }
 \arguments{
 \item{src}{Source files to copy.  See details}
@@ -19,6 +19,15 @@ attributes etc?  Generally this is wanted.}
 \item{compress}{Compress files on transfer?}
 
 \item{verbose}{Be verbose?}
+
+\item{relative}{Copy relative paths only, rather than the last
+part of the file name.  So if you have a directory \code{src}
+and you want to syncronise all the \code{.c} files in it, you
+could use \code{src="src/*.c", relative=TRUE}.  You can include
+a dot at any point in a path name to indicate where the relative
+directory should start from;
+e.g. \code{/absolute/path/to/./src/*.c} which will create a
+directory \code{src} with .c files in it.}
 
 \item{delete}{Delete files on the remote machine.  When mirroring
 this is generally what you want to do but it is not enabled by

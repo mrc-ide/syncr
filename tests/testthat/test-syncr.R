@@ -63,3 +63,25 @@ test_that("Group of files", {
   syncr(file.path(path1, "*.h"), path2)
   expect_true(diff_dirs(path1, path2))
 })
+
+test_that("relative", {
+  path1 <- tempfile()
+  dir.create(path1, FALSE, TRUE)
+
+  create_dirs(path1, c("src", "a/deep/directory"))
+
+  files_c <- replicate(5, tempfile(tmpdir=file.path(path1, "src"),
+                                   fileext=".c"))
+  for (f in files_c) {
+    random_file(f, 100)
+  }
+
+  path2 <- tempfile()
+  dir.create(path2, FALSE, TRUE)
+
+  with_wd(path1,
+          syncr("src/*.c", path2, relative=TRUE))
+
+  expect_equal(dir(path2), "src")
+  expect_true(diff_dirs(file.path(path1, "src"), file.path(path2, "src")))
+})

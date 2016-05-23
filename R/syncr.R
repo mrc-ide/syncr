@@ -19,6 +19,14 @@
 ##'   default because it's potentially dangerous.
 ##' @param dry_run Don't actually do anything, but print what would be
 ##'   done instead.
+##' @param relative Copy relative paths only, rather than the last
+##'   part of the file name.  So if you have a directory \code{src}
+##'   and you want to syncronise all the \code{.c} files in it, you
+##'   could use \code{src="src/*.c", relative=TRUE}.  You can include
+##'   a dot at any point in a path name to indicate where the relative
+##'   directory should start from;
+##'   e.g. \code{/absolute/path/to/./src/*.c} which will create a
+##'   directory \code{src} with .c files in it.
 ##' @param drop_src_directory In the case where \code{src} is a single
 ##'   directory, don't copy the directory, but copy the contents.
 ##' @param args_only Don't run anything and instead return the
@@ -26,7 +34,7 @@
 ##' @export
 syncr <- function(src, dest,
                   archive=TRUE, compress=TRUE, verbose=FALSE,
-                  delete=FALSE, dry_run=FALSE,
+                  relative=FALSE, delete=FALSE, dry_run=FALSE,
                   drop_src_directory=FALSE, args_only=FALSE) {
   src <- fix_paths(src)
   dest <- fix_paths(dest)
@@ -48,6 +56,7 @@ syncr <- function(src, dest,
             if (archive) "--archive",
             if (compress) "--compress",
             if (verbose) "--verbose",
+            if (relative) "--relative",
             if (delete) "--delete",
             if (dry_run) "--dry_run",
             src,
