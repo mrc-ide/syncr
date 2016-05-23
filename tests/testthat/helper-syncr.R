@@ -11,3 +11,12 @@ random_file <- function(path, max_len) {
   pool <- c(0:9, LETTERS, letters, " ", "\n")
   writeLines(paste(c(sample(pool, n, TRUE), "\n"), collapse=""), path)
 }
+
+## This might move into the package at some point
+diff_bin <- function() {
+  Sys_which("diff")
+}
+
+diff_dirs <- function(path1, path2) {
+  system2(diff_bin(), c("-rq", path1, path2), stdout=FALSE, stderr=FALSE) == 0L
+}
