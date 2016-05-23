@@ -12,8 +12,8 @@ run_rsync <- function(args, args_only) {
   }
 }
 
-rsync_bin <- function() {
-  getOption("syncr.rsync", Sys_which("rsync"))
+rsync_bin <- function(error=TRUE) {
+  getOption("syncr.rsync", unname(Sys_which("rsync", error)))
 }
 
 rsync_error_type <- function(code) {
@@ -47,4 +47,12 @@ rsync_error_type <- function(code) {
   } else {
     codes[[code]]
   }
+}
+
+
+##' Check if there is an rsync we can use.
+##' @title Check if there is an rsync we can use
+##' @export
+has_rsync <- function() {
+  !is.null(rsync_bin(FALSE))
 }
