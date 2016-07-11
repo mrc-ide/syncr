@@ -13,7 +13,7 @@
 ##' @param archive Copy in archive mode, being recursive, preserving
 ##'   attributes etc?  Generally this is wanted.
 ##' @param compress Compress files on transfer?
-##' @param verbose Be verbose?
+##' @param verbose Be verbose? (Always \code{TRUE} when using \code{dry_run}).
 ##' @param delete Delete files on the remote machine.  When mirroring
 ##'   this is generally what you want to do but it is not enabled by
 ##'   default because it's potentially dangerous.
@@ -50,6 +50,10 @@ syncr <- function(src, dest,
     } else {
       stop("src must be a directory or remote name to use drop_src_directory")
     }
+  }
+
+  if (dry_run) {
+    verbose <- FALSE
   }
 
   args <- c(character(0),

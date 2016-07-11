@@ -18,7 +18,7 @@ attributes etc?  Generally this is wanted.}
 
 \item{compress}{Compress files on transfer?}
 
-\item{verbose}{Be verbose?}
+\item{verbose}{Be verbose? (Always \code{TRUE} when using \code{dry_run}).}
 
 \item{relative}{Copy relative paths only, rather than the last
 part of the file name.  So if you have a directory \code{src}
