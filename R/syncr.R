@@ -58,7 +58,7 @@ syncr <- function(src, dest,
             if (verbose) "--verbose",
             if (relative) "--relative",
             if (delete) "--delete",
-            if (dry_run) "--dry_run",
+            if (dry_run) "--dry-run",
             src,
             dest)
 
