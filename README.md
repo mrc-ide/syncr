@@ -8,8 +8,13 @@ Syncronise directories using `rsync`.  This just uses `system2` to shell out to 
 
 ## Installation
 
+```r
+devtools::install_github("richfitz/syncr")
+```
+
 ## Usage
 
 ```r
 library(syncr)
+rsync(src = system.file("DESCRIPTION", package = "syncr"), dest = tempfile(), dry_run = TRUE, verbose = TRUE)
 ```
