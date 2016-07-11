@@ -15,6 +15,5 @@ devtools::install_github("richfitz/syncr")
 ## Usage
 
 ```r
-library(syncr)
-rsync(src = system.file("DESCRIPTION", package = "syncr"), dest = tempfile(), dry_run = TRUE, verbose = TRUE)
+syncr::rsync(src = system.file("DESCRIPTION", package = "syncr"), dest = tempfile(), dry_run = TRUE)
 ```
