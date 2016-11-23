@@ -6,7 +6,7 @@
 \usage{
 syncr(src, dest, archive = TRUE, compress = TRUE, verbose = FALSE,
   relative = FALSE, delete = FALSE, dry_run = FALSE,
-  drop_src_directory = FALSE, args_only = FALSE)
+  drop_src_directory = FALSE, inplace = NULL, args_only = FALSE)
 }
 \arguments{
 \item{src}{Source files to copy.  See details}
@@ -38,6 +38,13 @@ done instead.}
 
 \item{drop_src_directory}{In the case where \code{src} is a single
 directory, don't copy the directory, but copy the contents.}
+
+\item{inplace}{Copy files in place.  This helps when copying to
+windows network shares where the unix emulation layer and
+windows don't get on very well.  The downside is that if the
+copy fails it leaves files in an inconsistent state.  By
+default, it will be used on windows and when the destination is
+an absolute path.}
 
 \item{args_only}{Don't run anything and instead return the
 arguments that would have been passed to rsync.}
