@@ -103,3 +103,7 @@ drop_trailing_slashes <- function(x) {
 fix_paths <- function(x) {
   drop_trailing_slashes(fix_windows_paths(x))
 }
+
+is_windows <- function() {
+  Sys.info()[["sysname"]] == "Windows"
+}
