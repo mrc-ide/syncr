@@ -18,7 +18,7 @@ diff_bin <- function() {
 }
 
 diff_dirs <- function(path1, path2) {
-  system2(diff_bin(), c("-rq", path1, path2), stdout=FALSE, stderr=FALSE) == 0L
+  system3(diff_bin(), c("-rq", path1, path2))$code == 0L
 }
 
 with_wd <- function(wd, expr) {
