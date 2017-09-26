@@ -9,7 +9,8 @@ Syncronise directories using `rsync`.  This just uses `system2` to shell out to 
 ## Installation
 
 ```r
-devtools::install_github("richfitz/syncr")
+drat:::add("mrc-ide")
+install.packages("syncr")
 ```
 
 ## Usage

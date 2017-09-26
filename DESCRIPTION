@@ -6,7 +6,7 @@ Maintainer: Rich FitzJohn <rich.fitzjohn@gmail.com>
 Description: Syncronise directories using rsync.
 License: MIT + file LICENSE
 LazyData: true
-URL: https://github.com/richfitz/syncr
-BugReports: https://github.com/richfitz/syncr/issues
+URL: https://github.com/mrc-ide/syncr
+BugReports: https://github.com/mrc-ide/syncr/issues
 RoxygenNote: 5.0.1
 Suggests: testthat
