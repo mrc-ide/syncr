@@ -45,21 +45,9 @@ syncr <- function(src, dest,
                   relative = FALSE, delete = FALSE, dry_run = FALSE,
                   drop_src_directory=FALSE, inplace = NULL,
                   args_only = FALSE) {
-  src <- fix_paths(src)
-  dest <- fix_paths(dest)
-  if (length(dest) != 1) {
-    stop("Expected a single path for ")
-  }
-
-  if (drop_src_directory) {
-    if (length(src) != 1L) {
-      stop("Can only use drop_src_directory with a single path")
-    } else if (is_remote_path(src) || is_directory(src)) {
-      src <- paste0(src, "/")
-    } else {
-      stop("src must be a directory or remote name to use drop_src_directory")
-    }
-  }
+  dat <- prepare_paths(src, dest, drop_src_directory)
+  src <- dat$src
+  dest <- dat$dest
 
   if (dry_run) {
     verbose <- FALSE

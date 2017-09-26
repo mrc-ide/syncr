@@ -145,23 +145,9 @@ rsync <- function(src, dest, verbose=FALSE, quiet=FALSE,
                   read_batch=NULL, protocol=NULL, checksum_seed=NULL,
                   ipv4=FALSE, ipv6=FALSE, extended_attributes=FALSE,
                   cache=FALSE, drop_src_directory=FALSE, args_only=FALSE) {
-  src <- fix_paths(src)
-  dest <- fix_paths(dest)
-  if (length(dest) != 1) {
-    stop("Expected a single path for ")
-  }
-
-  if (drop_src_directory) {
-    if (length(src) != 1L) {
-      stop("Can only use drop_src_directory with a single path")
-    } else if (is_remote_path(src) || is_directory(src)) {
-      if (grepl("[^/]$", src)) {
-        src <- paste0(src, "/")
-      }
-    } else {
-      stop("src must be a directory or remote name to use drop_src_directory")
-    }
-  }
+  dat <- prepare_paths(src, dest, drop_src_directory)
+  src <- dat$src
+  dest <- dat$dest
 
   args <- list()
 

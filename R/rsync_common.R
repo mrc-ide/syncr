@@ -56,3 +56,26 @@ rsync_error_type <- function(code) {
 has_rsync <- function() {
   !is.null(rsync_bin(FALSE))
 }
+
+prepare_paths <- function(src, dest, drop_src_directory) {
+  src_is_dir <- is_remote_path(src) || is_directory(src)
+  src <- fix_paths(src)
+  dest <- fix_paths(dest)
+  if (length(dest) != 1) {
+    stop("Expected a single path for ")
+  }
+
+  if (drop_src_directory) {
+    if (length(src) != 1L) {
+      stop("Can only use drop_src_directory with a single path")
+    } else if (src_is_dir) {
+      if (grepl("[^/]$", src)) {
+        src <- paste0(src, "/")
+      }
+    } else {
+      stop("src must be a directory or remote name to use drop_src_directory")
+    }
+  }
+
+  list(src = src, dest = dest)
+}
